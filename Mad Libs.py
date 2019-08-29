@@ -1,26 +1,7 @@
-def pluralize(string):
-    str = string.lower()
-    sec_last_let = len(str)-2
-
-    # Check for adding "es"
-    if (str.endswith("s") or str.endswith("sh")
-            or str.endswith("x") or str.endswith("ch")):
-        str = str + "es"
-
-    # Check for consonant+y
-    elif (str.endswith("y")) and (str[sec_last_let] != "a" and
-                                  str[sec_last_let] != "e" and
-                                  str[sec_last_let] != "i" and
-                                  str[sec_last_let] != "o" and
-                                  str[sec_last_let] != "u"):
-        str = str[:len(str)-1] + "ies"
-
-    # Default pluralization
-    else:
-        str = str + "s"
-
-    return str
-
+# Inflect for pluralization functionality. Credit goes to Jazzband.
+# https://pypi.org/project/inflect/
+import inflect
+p = inflect.engine()
 
 word_dict = {
     "NAME": "",
@@ -74,4 +55,4 @@ story = """
 
 # print(word_dict)
 
-print(pluralize(input()))
+print(p.plural(input()))
