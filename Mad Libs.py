@@ -27,7 +27,7 @@ def get_words(dict):
                 print("I didn't get that. Please try again")
 
     dict["NOUN_2P"] = pluralize(dict["NOUN_2"])
-    dict["VERB_1P"] = conjugate(dict["VERB_1"], "inf")
+    dict["VERB_1P"] = conjugate(dict["VERB_1"], "p")
 
 
 # Replace all words in the story
