@@ -1,9 +1,5 @@
 import random
-import inflect
-
-# Inflect is used for pluralization functionality. Credit goes to Jazzband.
-# https://pypi.org/project/inflect/
-p = inflect.engine()
+from pattern.text.en import pluralize, conjugate
 
 # Check the part of speech of words
 def get_type(key):
@@ -22,7 +18,7 @@ def get_words(dict):
     # https://stackoverflow.com/questions/7785672/how-to-iterate-through-dict-in-random-order-in-python
     for key in keys:
        while dict[key] == "" and key != "NOUN_2P":
-            if key.startswith("a"):
+            if key.startswith("A"):
                 dict[key] = input("Please input an " + get_type(key) + ": ")
             else:
                 dict[key] = input("Please input a " + get_type(key) + ": ")
@@ -30,17 +26,15 @@ def get_words(dict):
             if dict[key] == "":
                 print("I didn't get that. Please try again")
 
-    dict["NOUN_2P"] = p.plural(dict["NOUN_2"])
+    dict["NOUN_2P"] = pluralize(dict["NOUN_2"])
+    dict["VERB_1P"] = conjugate(dict["VERB_1"], "inf")
 
 
 # Replace all words in the story
 def replace_words(story, dict):
     new_story = story
     for key in dict:
-        if key == "NOUN_2P":
-            new_story = new_story.replace("["+key+"]", p.plural(dict[key]))
-        else:
-            new_story = new_story.replace("["+key+"]", dict[key])
+        new_story = new_story.replace("["+key+"]", dict[key])
 
     return new_story
 
@@ -54,6 +48,7 @@ word_dict = {
     "NOUN_4": "",
     "PLURAL NOUN_1": "",
     "PLURAL NOUN_2": "",
+    "VERB_1P": "",
     "VERB_1": "",
     "VERB_2": "",
     "VERB_3": "",
@@ -84,7 +79,7 @@ template = """
     [NAME]'s "Three Laws of [FIELD OF STUDY]"
 
     1. A [NOUN_1] may not [VERB_1] a [NOUN_2] or, through inaction, allow a
-       [NOUN_2] to [VERB_1].
+       [NOUN_2] to be [VERB_1P].
 
     2. A [NOUN_1] must obey [PLURAL NOUN_1] given it by [NOUN_2P] except where
        such [PLURAL NOUN_1] would conflict with the First Law.
