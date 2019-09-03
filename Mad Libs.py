@@ -39,6 +39,7 @@ def replace_words(story, dict):
 
     return new_story
 
+
 # List of keys that will be used for replacement
 word_dict = {
     "NAME": "",
@@ -91,6 +92,7 @@ template = """
     These laws ensure that a [NOUN_3] which relies [ADVERB_1] on [NOUN_1] does
     not [VERB_3] to [PLURAL NOUN_2] on a [ADJECTIVE_1] scale.
     """
+
 
 # Run program
 get_words(word_dict)
