@@ -5,3 +5,4 @@ Running the program in the terminal will prompt the user with a part of speech, 
 This repeats until all the blanks in the story are filled, and the completed story is then presented to the user.
 
 REQUIRED: Pattern.en (https://www.clips.uantwerpen.be/pages/pattern-en)
+          To install, use `pip3 install Pattern`
